@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student E-Piggy Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #C8A2C8; /* Lilac background */
+            color: #4B0082; /* Dark purple text for contrast */
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(230, 210, 230, 0.9); /* light lilac semi-transparent box */
+            border-radius: 10px;
+            box-shadow: 0 0 10px #b19cd9; /* soft glow */
+        }
+        input, button {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #b19cd9;
+            background: #e6d2e6; /* slightly darker lilac for inputs/buttons */
+            color: #4B0082;
+            width: 100%;
+        }
+        input::placeholder {
+            color: #6b4c6b;
+        }
+        button:hover {
+            background: #b19cd9;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        h1 {
+            text-align: center; /* Center the title */
+            color: #4B0082;
+        }
+        h2 {
+            color: #4B0082;
+        }
+        #messageBox {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #6b4c6b;
+        }
+        img {
+            display: block;
+            margin: 0 0 20px 0; /* Keep logo left-aligned */
+        }
+        hr {
+            border: 1px solid #b19cd9;
+        }
+    </style>
+</head>
+<body>
+
+<img src="logo.jpg" alt="Logo">
+<h1><i>Welcome to the Student E-Piggy Bank</i></h1>
+
+<div class="box">
+
+    <!-- Message Display -->
+    <p id="messageBox"></p>
+
+    <!-- Create Account -->
+    <h2>Create an Account</h2>
+    <input id="studentname" type="text" placeholder="Enter Your Name"><br>
+    <input id="password" type="password" placeholder="Enter Password"><br>
+    <button onclick="createAccount()">Create Account</button>
+
+    <hr>
+
+    <!-- Deposit Section -->
+    <h2>Deposit Money</h2>
+    <label for="depositAmount">Amount to Deposit:</label>
+    <input type="number" id="depositAmount" min="1" step="1" placeholder="e.g. 100"><br>
+    <button onclick="submitDeposit()">Deposit</button>
+
+    <hr>
+
+    <!-- Withdraw Section -->
+    <h2>Withdraw Money</h2>
+    <label for="withdrawAmount">Amount to Withdraw:</label>
+    <input type="number" id="withdrawAmount" min="1" step="1" placeholder="e.g. 100"><br>
+    <button onclick="submitWithdraw()">Withdraw</button>
+
+    <hr>
+
+    <!-- Check Balance Section -->
+    <h2>Check Balance</h2>
+    <button onclick="checkBalance()">Check Balance</button>
+
+</div>
+
+<script>
+    // Global balance variable
+    let balance = 0;
+
+    function showMessage(msg) {
+        document.getElementById("messageBox").innerText = msg;
+    }
+
+    function createAccount() {
+        const name = document.getElementById('studentname').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!name) {
+            alert("Please enter your name.");
+            return;
+        }
+
+        if (!password) {
+            alert("Please enter a password.");
+            return;
+        }
+
+        balance = 0; // Reset balance on new account
+        alert("Account created successfully!");
+        showMessage("Account created successfully for " + name + "!");
+    }
+
+    function submitDeposit() {
+        const amount = parseInt(document.getElementById('depositAmount').value);
+
+        if (!amount || amount <= 0) {
+            alert("Please enter a valid amount to deposit.");
+            return;
+        }
+
+        balance += amount;
+        alert("Deposited: ₹" + amount);
+        showMessage("₹" + amount + " deposited success

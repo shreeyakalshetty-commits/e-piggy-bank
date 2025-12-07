@@ -1,0 +1,95 @@
+<html>
+<head>
+<body>
+<script>
+    // Global balance variable
+    let balance = 0;
+    let accountName = "";
+    let accountCreated = false;
+
+    function showMessage(msg) {
+        document.getElementById("messageBox").innerText = msg;
+    }
+
+    // Create Account
+    function createAccount() {
+        const name = document.getElementById("studentname").value.trim();
+        const password = document.getElementById("password").value;
+
+        if (!name) {
+            alert("❗ Please enter your name.");
+            return;
+        }
+
+        if (!password) {
+            alert("❗ Please enter a password.");
+            return;
+        }
+
+        accountCreated = true;
+        accountName = name;
+        balance = 0;
+
+        alert("🎉 Account created successfully for " + name + "!");
+        showMessage("Account created successfully for " + name + "!");
+    }
+
+    // Deposit Money
+    function submitDeposit() {
+        if (!accountCreated) {
+            alert("⚠ Please create an account first.");
+            return;
+        }
+
+        const amount = parseInt(document.getElementById("depositAmount").value);
+
+        if (!amount || amount <= 0) {
+            alert("❗ Please enter a valid amount to deposit.");
+            return;
+        }
+
+        balance += amount;
+
+        alert("💰 Deposit Successful!\nYou deposited: ₹" + amount + "\nNew Balance: ₹" + balance);
+        showMessage("₹" + amount + " deposited successfully!");
+    }
+
+    // Withdraw Money
+    function submitWithdraw() {
+        if (!accountCreated) {
+            alert("⚠ Please create an account first.");
+            return;
+        }
+
+        const amount = parseInt(document.getElementById("withdrawAmount").value);
+
+        if (!amount || amount <= 0) {
+            alert("❗ Please enter a valid withdrawal amount.");
+            return;
+        }
+
+        if (amount > balance) {
+            alert("❌ Insufficient balance!\nYour current balance is ₹" + balance);
+            return;
+        }
+
+        balance -= amount;
+
+        alert("🏧 Withdrawal Successful!\nYou withdrew: ₹" + amount + "\nNew Balance: ₹" + balance);
+        showMessage("₹" + amount + " withdrawn successfully!");
+    }
+
+    // Check Balance
+    function checkBalance() {
+        if (!accountCreated) {
+            alert("⚠ Please create an account first.");
+            return;
+        }
+
+        alert("📊 Current Balance: ₹" + balance);
+        showMessage("Your balance is ₹" + balance);
+    }
+</script>
+  </body>
+  </head>
+  </html>
